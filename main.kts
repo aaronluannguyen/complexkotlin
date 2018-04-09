@@ -32,11 +32,14 @@ fun Int.times(block: () -> Unit): Unit {
 fun process(message: String, block: (String) -> String): String {
     return ">>> ${message}: {" + block(message) + "}"
 }
-val r1 = "" // call process() with message "FOO" and a block that returns "BAR"
 
+// call process() with message "FOO" and a block that returns "BAR"
+val r1 = process("FOO", {"BAR"})
+
+// call process() with message "FOO" and a block that upper-cases
+// r2_message, and repeats it three times with no spaces: "WOOGAWOOGAWOOGA"
 val r2_message = "wooga"
-val r2 = "" // call process() with message "FOO" and a block that upper-cases 
-            // r2_message, and repeats it three times with no spaces: "WOOGAWOOGAWOOGA"
+val r2 = process("FOO", {r2_message.toUpperCase().repeat(3)})
 
 
 // write an enum-based state machine between talking and thinking
@@ -55,10 +58,10 @@ class Command(val prompt: String) {
 // ================================
 println("map fold test: " + if (mapFoldResults == "FIZZBUZZFIZZFIZZBUZZFIZZFIZZBUZZ") "." else "!")
 
-//println("r1 test: " + if (r1 == ">>> FOO: {BAR}") "." else "!")
-//
-//println("r2 test: " + if (r2 == ">>> FOO: {WOOGAWOOGAWOOGA}") "." else "!")
-//
+println("r1 test: " + if (r1 == ">>> FOO: {BAR}") "." else "!")
+
+println("r2 test: " + if (r2 == ">>> FOO: {WOOGAWOOGAWOOGA}") "." else "!")
+
 //var seneca = Philosopher.THINKING
 //print("Seneca, talk! ")
 //seneca = seneca.signal()
